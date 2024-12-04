@@ -43,7 +43,7 @@ function destroy(req, res) {
     const filtred = objectsFoods.findIndex(indice => indice.id === id);
     if (filtred) {
         objectsFoods.splice(filtred, 1)
-        res.send("fatto")
+        res.sendStatus(204)
     }
 
 }  // Eliminazione di un alimento
