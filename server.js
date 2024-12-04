@@ -16,28 +16,11 @@ const express = require("express");
 // - Creiamo una costante app e assegniamo il valore dell'applicazione server.
 const app = express();
 // - Creiamo una costante e la inizializziamo al valore della porta:
-const PORT = 3000;
-// - Importiamo l'array di oggetti dal file db.js
-const objectsFoods = require("./db.js");
+const PORT = 3000
 // - Garantiamo l'utilizzo degli asset
 app.use(express.static('public')); // Servire file dalla cartella "public".
 
-// Creaimo una rotta semplice per inviare il file html al client.
-// app.get("/", (req, res) => {
-//     res.sendFile(`${__dirname}/public/index.html`)
-// });
-
-// POSSIAMO OMETTERE IL CODICE POICHE GESTITO SU ROOUTING DI FOODS.JS
-// Creaimo una rotta alternativa per inviare l'oggetto creato in formato json.
-// app.get("/foods", (req, res) => {
-//     const risposta = {
-//         conteggio: objectsFoods.length,
-//         foods: objectsFoods
-//     }
-//     res.json(risposta)
-// })
-
-// Importiamo il file foods.js all'interno della cartella routers.
+// Importiamo il file foods.js dall'interno della cartella routers.
 const roouting = require("./routers/foods.js")
 app.use("/foods", roouting) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
 // Importiamo il file colors.js all'interno della cartella routers.

@@ -1,45 +1,31 @@
-// STEP 1 
+// STEP 1 PRIMA ROTTA
 // - Importiamo nuovamente il modulo express sul nuovo file js.
 const express = require("express");
 // - Utilizziamo il metodo express per gestire le rotte in modo modulare.
-const foodsRouter = express.Router();
-// - Importo l'array di oggetti
-const objectsFoods = require("../db.js");
+const foodsRouter = express.Router(); // Oggetto express per creare un instanza routing.
+// - Importiamo le funzioni di controllo dal file foodControllers:
+const { index, show, store, update, modify, destroy } = require("../controllers/foodsController.js")
 
 // STEP 2 
 // - Creiamo le richieste http con i vari metodi (GET,POST,PUT,PATCH,DELETE)
 
 // READ - (INDEX)
-foodsRouter.get('/', (req, res) => {
-    const risposta = {
-        conteggio: objectsFoods.length,
-        foods: objectsFoods
-    }
-    res.json(risposta)
-});
+foodsRouter.get('/', index); // Richiesta get generica
 
 // READ - (SHOW)
-foodsRouter.get('/:id', (req, res) => {
-    const parametro = parseInt(req.params.id);
-    console.log(parametro);
-
-    const filtredArray = objectsFoods.find(element => element.id === parametro)
-    res.json(filtredArray)
-
-
-}); // Richiesta get specifica
+foodsRouter.get('/:id', show); // Richiesta get specifica
 
 // CREATE - (STORE)
-foodsRouter.post('/', (req, res) => res.send('Creazione nuovo alimento')); // Creazione di un nuovo alimento
+foodsRouter.post('/', store); // Creazione di un nuovo alimento
 
 // UPDATE - (UPDATE)
-foodsRouter.put('/:id', (req, res) => res.send(`Aggiornamento alimento`)); // Aggiornamento completo di un alimento
+foodsRouter.put('/:id', update); // Aggiornamento completo di un alimento
 
 // PATCH - (MODIFY)
-foodsRouter.patch('/:id', (req, res) => res.send(`Aggiornamento parziale alimento`)); // Aggiornamento parziale di un alimento
+foodsRouter.patch('/:id', modify); // Aggiornamento parziale di un alimento
 
 // DELETE - (DESTROY)
-foodsRouter.delete('/:id', (req, res) => res.send(`Eliminazione alimento`)); // Eliminazione di un alimento
+foodsRouter.delete('/:id', destroy); // Eliminazione di un alimento
 
-// Esportazione del modulo
+// Esportazione del modulo di routing
 module.exports = foodsRouter;

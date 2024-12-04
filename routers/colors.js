@@ -1,8 +1,8 @@
-// STEP 1 
+// STEP 1 SECONDA ROTTA
 // - Importiamo nuovamente il modulo express sul nuovo file js.
 const express = require("express");
 // - Utilizziamo il metodo express per gestire le rotte in modo modulare.
-const colorsRouter = express.Router();
+const colorsRouter = express.Router(); // Oggetto express per creare un instanza routing.
 
 // STEP 2 
 // - Creiamo le richieste http con i vari metodi (GET,POST,PUT,PATCH,DELETE)
