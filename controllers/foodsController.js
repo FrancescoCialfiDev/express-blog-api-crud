@@ -4,11 +4,19 @@ const objectsFoods = require("../data/db")
 // READ - (INDEX)
 function index(req, res) {
 
-    const risposta = {
-        conteggio: objectsFoods.length,
-        foods: objectsFoods
-    }
-    res.json(risposta)
+    // req query è sempre truthy quindi bisogna porre una condizione sul valore di tags.
+    if (req.query.tags) {
+        const query = req.query.tags;
+        let copyArray = [...objectsFoods];
+        copyArray = copyArray.filter(arrays => arrays.tags.includes(query));
+        res.json(copyArray);
+    } else {
+        const response = {
+            conteggio: objectsFoods.length,
+            foods: objectsFoods
+        };
+        res.json(response);
+    };
 
 } // Richiesta get generica
 
@@ -16,9 +24,19 @@ function index(req, res) {
 function show(req, res) {
 
     const parametro = parseInt(req.params.id);
-    console.log(parametro);
-    const filtredArray = objectsFoods.find(element => element.id === parametro)
-    res.json(filtredArray)
+    const filtredArray = objectsFoods.find(element => element.id === parametro);
+
+
+    if (filtredArray) {
+        const response = {
+            length: filtredArray.length,
+            item: filtredArray
+        }
+        res.json(response)
+    } else {
+        res.sendStatus(404);
+
+    }
 
 } // Richiesta get specifica
 
@@ -41,9 +59,13 @@ function modify(req, res) {
 function destroy(req, res) {
     const id = parseInt(req.params.id)
     const filtred = objectsFoods.findIndex(indice => indice.id === id);
-    if (filtred) {
+    console.log(filtred);
+
+    if (filtred !== -1) {
         objectsFoods.splice(filtred, 1)
         res.sendStatus(204)
+    } else {
+        res.sendStatus(404)
     }
 
 }  // Eliminazione di un alimento
