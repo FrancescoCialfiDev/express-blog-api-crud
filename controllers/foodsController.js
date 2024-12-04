@@ -1,5 +1,5 @@
 
-const objectsFoods = require("../db")
+const objectsFoods = require("../data/db")
 
 // READ - (INDEX)
 function index(req, res) {
@@ -39,7 +39,13 @@ function modify(req, res) {
 
 // DELETE - (DESTROY)
 function destroy(req, res) {
-    res.send(`Eliminazione alimento`);
+    const id = parseInt(req.params.id)
+    const filtred = objectsFoods.findIndex(indice => indice.id === id);
+    if (filtred) {
+        objectsFoods.splice(filtred, 1)
+        res.send("fatto")
+    }
+
 }  // Eliminazione di un alimento
 
 module.exports = { index, show, store, update, modify, destroy };
