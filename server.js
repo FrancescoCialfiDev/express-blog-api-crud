@@ -16,26 +16,24 @@ const express = require("express");
 // - Creiamo una costante app e assegniamo il valore dell'applicazione server.
 const app = express();
 // - Creiamo una costante e la inizializziamo al valore della porta:
-const PORT = 3000
+const PORT = 3000;
 // - Garantiamo l'utilizzo degli asset
 app.use(express.static('public')); // Servire file dalla cartella "public".
 
-// Importiamo il file foods.js dall'interno della cartella routers.
-const roouting = require("./routers/foods.js");
+// Importiamo il file foods.js all'interno della cartella routers.
+const roouting = require("./routers/foods.js")
 app.use("/foods", roouting) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
-// Importiamo il file colors.js all'interno della cartella routers.
-const colors = require("./routers/colors.js");
-app.use("/colors", colors);
+// Importiamo il file commentsRouter.js all'interno della cartella routers.
+const commentsRouter = require("./routers/comments.js");
+app.use("/comments", commentsRouter)
 
-
-// - In caso non venga trovato nessun percorso viene inviato un errore 404
 app.get("*", (req, res) => {
     res.status(404).send("Non è stato possibile trovare la pagina");
-
 })
+
 // Mettiamo in ascolto la nostra variabile app che contiene il server, sulla porta 3000.
 app.listen(PORT, () => {
     console.log(`Server in ascolto su http://localhost:${PORT}`);
-});
+})
 
 

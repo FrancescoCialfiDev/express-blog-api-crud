@@ -70,4 +70,5 @@ function destroy(req, res) {
 
 }  // Eliminazione di un alimento
 
+
 module.exports = { index, show, store, update, modify, destroy };
