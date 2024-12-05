@@ -27,11 +27,6 @@ foodsRouter.patch('/:id', modify); // Aggiornamento parziale di un alimento
 // DELETE - (DESTROY)
 foodsRouter.delete('/:id', destroy); // Eliminazione di un alimento
 
-// ERROR - (ERROR)
-foodsRouter.get('*', error); // Send error
-
-
-
 
 // Esportazione del modulo di routing
 module.exports = foodsRouter;

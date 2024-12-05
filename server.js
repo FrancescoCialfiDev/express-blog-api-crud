@@ -30,6 +30,10 @@ app.use("/foods", routingFoods) // Usiamo il metodo use per indicare l'utilizzo 
 const commentsRouter = require("./routers/comments.js");
 app.use("/comments", commentsRouter) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
 
+app.get("*", (req, res) => {
+    res.status(404).send("Non è stato possibile trovare la pagina");
+})
+
 // Mettiamo in ascolto la nostra variabile app che contiene il server, sulla porta 3000.
 app.listen(PORT, () => {
     console.log(`Server in ascolto su http://localhost:${PORT}`);

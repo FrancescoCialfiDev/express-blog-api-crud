@@ -71,12 +71,12 @@ function update(req, res) {
 
     const parametro = parseInt(req.params.id);
     let filtredArray = objectsFoods.find(element => element.id === parametro);
-    console.log(req.body)
     const id = req.params.id
 
     if (filtredArray) {
         const { titolo, contenuto, immagine, tags } = req.body
         filtredArray = { id, titolo, contenuto, immagine, tags }
+        console.log(filtredArray);
         res.json(filtredArray)
     } else {
         res.status(404).json({
@@ -84,8 +84,6 @@ function update(req, res) {
             error: "Nessun elemento trovato"
         })
     }
-
-    // QUANDO FACCIO PUT MI PORTA VIA L'ID  PROBLEMAAAAAA
 
 }
 
@@ -110,8 +108,4 @@ function destroy(req, res) {
 
 }  // Eliminazione di un alimento
 
-function error(req, res) {
-    res.status(404).send("Non è stato possibile trovare la pagina");
-};  // NON MI FUNZIONA PER COME MI ASPETTO
-
-module.exports = { index, show, store, update, modify, destroy, error };
+module.exports = { index, show, store, update, modify, destroy };
