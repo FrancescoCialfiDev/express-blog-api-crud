@@ -1,0 +1,1 @@
+"server": "node --watch server.js"   Is an alias for start live cmd

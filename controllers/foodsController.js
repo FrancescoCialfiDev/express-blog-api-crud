@@ -84,6 +84,7 @@ function update(req, res) {
         })
     }
 
+    // QUANDO FACCIO PUT MI PORTA VIA L'ID  PROBLEMAAAAAA
 
 }
 
@@ -110,6 +111,6 @@ function destroy(req, res) {
 
 function error(req, res) {
     res.status(404).send("Non è stato possibile trovare la pagina");
-};
+};  // NON MI FUNZIONA PER COME MI ASPETTO
 
 module.exports = { index, show, store, update, modify, destroy, error };
