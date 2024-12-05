@@ -26,7 +26,6 @@ function show(req, res) {
     const parametro = parseInt(req.params.id);
     const filtredArray = objectsFoods.find(element => element.id === parametro);
 
-
     if (filtredArray) {
         const response = {
             length: filtredArray.length,
@@ -42,13 +41,52 @@ function show(req, res) {
 
 // CREATE - (STORE)
 function store(req, res) {
-    res.send('Creazione nuovo alimento');
-}  // Creazione di un nuovo alimento
+
+    let flagID = 0
+    objectsFoods.forEach(element => {
+        if (flagID < element.id) {
+            flagID = element.id;
+        }
+    });
+
+    // Creiamo un nuovo elemento da inserire nell'array del db.js
+    const newAliment = {
+        id: ++flagID,
+        titolo: req.body.titolo,
+        contenuto: req.body.contenuto,
+        immagine: req.body.immagine,
+        tags: req.body.tags,
+    }
+    objectsFoods.push(newAliment)
+    res.status(201).json(newAliment);
+    console.log({
+        testo: "Il nuovo alimento inserito è il seguente:",
+        oggetto: newAliment,
+    });
+
+}  // Creazione di un nuovo alimento.
 
 // UPDATE - (UPDATE)
 function update(req, res) {
-    res.send(`Aggiornamento alimento`);
-}  // Aggiornamento completo di un alimento
+
+    const parametro = parseInt(req.params.id);
+    const filtredArray = objectsFoods.find(element => element.id === parametro);
+
+    if (filtredArray) {
+        for (const key in filtredArray) {
+            filtredArray[key] = req.body[key]
+        }
+        res.json(filtredArray)
+    } else {
+        res.status(404).json({
+            length: 0,
+            error: "Nessun elemento trovato"
+        })
+    }
+
+
+}
+
 
 // PATCH - (MODIFY)
 function modify(req, res) {
@@ -70,5 +108,8 @@ function destroy(req, res) {
 
 }  // Eliminazione di un alimento
 
+function error(req, res) {
+    res.status(404).send("Non è stato possibile trovare la pagina");
+};
 
-module.exports = { index, show, store, update, modify, destroy };
+module.exports = { index, show, store, update, modify, destroy, error };

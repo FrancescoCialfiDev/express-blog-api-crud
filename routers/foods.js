@@ -4,7 +4,7 @@ const express = require("express");
 // - Utilizziamo il metodo express per gestire le rotte in modo modulare.
 const foodsRouter = express.Router(); // Oggetto express per creare un instanza routing.
 // - Importiamo le funzioni di controllo dal file foodControllers:
-const { index, show, store, update, modify, destroy } = require("../controllers/foodsController.js")
+const { index, show, store, update, modify, destroy, error } = require("../controllers/foodsController.js")
 
 // STEP 2 
 // - Creiamo le richieste http con i vari metodi (GET,POST,PUT,PATCH,DELETE)
@@ -26,6 +26,10 @@ foodsRouter.patch('/:id', modify); // Aggiornamento parziale di un alimento
 
 // DELETE - (DESTROY)
 foodsRouter.delete('/:id', destroy); // Eliminazione di un alimento
+
+// ERROR - (ERROR)
+foodsRouter.get('*', error); // Send error
+
 
 
 

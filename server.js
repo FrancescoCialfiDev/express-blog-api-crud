@@ -17,19 +17,18 @@ const express = require("express");
 const app = express();
 // - Creiamo una costante e la inizializziamo al valore della porta:
 const PORT = 3000;
-// - Garantiamo l'utilizzo degli asset
+
+// - Garantiamo l'utilizzo degli assets nella cartella public
 app.use(express.static('public')); // Servire file dalla cartella "public".
 
-// Importiamo il file foods.js all'interno della cartella routers.
-const roouting = require("./routers/foods.js")
-app.use("/foods", roouting) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
-// Importiamo il file commentsRouter.js all'interno della cartella routers.
-const commentsRouter = require("./routers/comments.js");
-app.use("/comments", commentsRouter)
+// Utilizziamo il middleware per permettere la lettura dei file json inviati.
+app.use(express.json())
 
-app.get("*", (req, res) => {
-    res.status(404).send("Non è stato possibile trovare la pagina");
-})
+// Importiamo i file di routing:
+const routingFoods = require("./routers/foods.js")
+app.use("/foods", routingFoods) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
+const commentsRouter = require("./routers/comments.js");
+app.use("/comments", commentsRouter) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
 
 // Mettiamo in ascolto la nostra variabile app che contiene il server, sulla porta 3000.
 app.listen(PORT, () => {
