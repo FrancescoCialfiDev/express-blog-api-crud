@@ -71,12 +71,14 @@ function update(req, res) {
 
     const parametro = parseInt(req.params.id);
     let filtredArray = objectsFoods.find(element => element.id === parametro);
-    const id = req.params.id
+    const id = parseInt(req.params.id)
 
     if (filtredArray) {
         const { titolo, contenuto, immagine, tags } = req.body
-        filtredArray = { id, titolo, contenuto, immagine, tags }
-        console.log(filtredArray);
+        const modifiedObject = { id, titolo, contenuto, immagine, tags }
+        for (const key in filtredArray) {
+            filtredArray[key] = modifiedObject[key];
+        }
         res.json(filtredArray)
     } else {
         res.status(404).json({
