@@ -70,13 +70,14 @@ function store(req, res) {
 function update(req, res) {
 
     const parametro = parseInt(req.params.id);
-    const filtredArray = objectsFoods.find(element => element.id === parametro);
+    let filtredArray = objectsFoods.find(element => element.id === parametro);
     console.log(req.body)
     const id = req.params.id
 
     if (filtredArray) {
         const { titolo, contenuto, immagine, tags } = req.body
-        res.json({ id, titolo, contenuto, immagine, tags })
+        filtredArray = { id, titolo, contenuto, immagine, tags }
+        res.json(filtredArray)
     } else {
         res.status(404).json({
             length: 0,
