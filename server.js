@@ -44,8 +44,8 @@ app.use("/comments", commentsRouter) // Usiamo il metodo use per indicare l'util
 app.use((req, res, next) => {
     res.status(404).json({ message: "Endpoint non trovato" });
 });
-
-
+const error = require("./middlewares/checkError.js")
+app.use("*", error)
 // Mettiamo in ascolto la nostra variabile app che contiene il server, sulla porta 3000.
 app.listen(PORT, () => {
     console.log(`Server in ascolto su http://localhost:${PORT}`);
