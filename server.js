@@ -13,30 +13,41 @@ console.clear(); // Effettuiamo un clear della console da eventuali errori e rig
 
 // - Creiamo una costante e importiamo il modulo express.
 const express = require("express");
-// - Creiamo una costante app e assegniamo il valore dell'applicazione server.
+// - Creiamo applicazione server con oggetto express.
 const app = express();
-// - Creiamo una costante e la inizializziamo al valore della porta:
-const PORT = 3000;
+// - Creiamo una costante e la inizializziamo al valore della porta 3000 oppure in alternativa alla porta definita in .env
+const PORT = process.env.PORT || 5500;
 
 // - Garantiamo l'utilizzo degli assets nella cartella public
 app.use(express.static('public')); // Servire file dalla cartella "public".
 
-// Utilizziamo il middleware per permettere la lettura dei file json inviati.
+///////////////////////////////////////////////
+
+// STEP 3 ----Utilizzo-Dei-MiddleWare----:
+
+// Utilizziamo il middleware per permettere il parsing dei file json inviati.
 app.use(express.json())
 
-// Importiamo i file di routing:
+// Altri tipi di middleware...
+
+///////////////////////////////////////////////
+
+// STEP 4 ----Import-File-Routing----:
+
 const routingFoods = require("./routers/foods.js")
 app.use("/foods", routingFoods) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
 const commentsRouter = require("./routers/comments.js");
-app.use("/comments", commentsRouter) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
+app.use("/comments", commentsRouter) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing
 
-app.get("*", (req, res) => {
-    res.status(404).send("Non è stato possibile trovare la pagina");
-})
+
+// Middleware per le rotte non registrate
+app.use((req, res, next) => {
+    res.status(404).json({ message: "Endpoint non trovato" });
+});
+
 
 // Mettiamo in ascolto la nostra variabile app che contiene il server, sulla porta 3000.
 app.listen(PORT, () => {
     console.log(`Server in ascolto su http://localhost:${PORT}`);
 })
-
 

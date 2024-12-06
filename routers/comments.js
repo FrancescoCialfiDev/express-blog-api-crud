@@ -3,8 +3,8 @@
 const express = require("express");
 // - Utilizziamo il metodo express per gestire le rotte in modo modulare.
 const commentsRouter = express.Router(); // Oggetto express per creare un instanza routing.
-// - Importiamo le funzioni di controllo dal file foodControllers:
-const { index, show, store, update, modify, destroy } = require("../controllers/foodsController.js")
+// - Importiamo le funzioni di controllo dal file commentsController.js:
+const { index, show, store, update, modify, destroy } = require("../controllers/commentsController")
 
 // STEP 2 
 // - Creiamo le richieste http con i vari metodi (GET,POST,PUT,PATCH,DELETE)
