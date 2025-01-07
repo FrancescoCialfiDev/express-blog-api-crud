@@ -1,5 +1,5 @@
 
-const objectsFoods = require("../data/db")
+const objectsFoods = require("../data/posts")
 
 // READ - (INDEX)
 function index(req, res) {

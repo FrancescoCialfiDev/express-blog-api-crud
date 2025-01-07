@@ -13,12 +13,14 @@ console.clear(); // Effettuiamo un clear della console da eventuali errori e rig
 
 // - Creiamo una costante e importiamo il modulo express.
 const express = require("express");
+var cors = require('cors')
 // - Creiamo applicazione server con oggetto express.
 const app = express();
 // - Creiamo una costante e la inizializziamo al valore della porta 3000 oppure in alternativa alla porta definita in .env
 const PORT = process.env.PORT || 5500;
 
 // - Garantiamo l'utilizzo degli assets nella cartella public
+app.use(cors())
 app.use(express.static('public')); // Servire file dalla cartella "public".
 
 ///////////////////////////////////////////////
@@ -36,8 +38,7 @@ app.use(express.json())
 
 const routingFoods = require("./routers/foods.js")
 app.use("/foods", routingFoods) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing.
-const commentsRouter = require("./routers/comments.js");
-app.use("/comments", commentsRouter) // Usiamo il metodo use per indicare l'utilizzo del modulo del file di routing
+
 
 
 // Middleware per le rotte non registrate
