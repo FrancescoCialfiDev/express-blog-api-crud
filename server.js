@@ -13,14 +13,16 @@ console.clear(); // Effettuiamo un clear della console da eventuali errori e rig
 
 // - Creiamo una costante e importiamo il modulo express.
 const express = require("express");
-var cors = require('cors')
 // - Creiamo applicazione server con oggetto express.
 const app = express();
 // - Creiamo una costante e la inizializziamo al valore della porta 3000 oppure in alternativa alla porta definita in .env
 const PORT = process.env.PORT || 5500;
+// - Creiamo una costante e importiamo cors, una libreria che permette al server di gestire richieste provenienti da origini diverse (Cross-Origin Resource Sharing).
+const cors = require('cors')
 
-// - Garantiamo l'utilizzo degli assets nella cartella public
+// - Utilizziamo la libreria cors importata.
 app.use(cors())
+// - Garantiamo l'utilizzo degli assets nella cartella public
 app.use(express.static('public')); // Servire file dalla cartella "public".
 
 ///////////////////////////////////////////////
@@ -47,6 +49,7 @@ app.use((req, res, next) => {
 });
 const error = require("./middlewares/checkError.js")
 app.use("*", error)
+
 // Mettiamo in ascolto la nostra variabile app che contiene il server, sulla porta 3000.
 app.listen(PORT, () => {
     console.log(`Server in ascolto su http://localhost:${PORT}`);
