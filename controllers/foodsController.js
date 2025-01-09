@@ -1,5 +1,5 @@
 
-const objectsFoods = require("../data/posts")
+const objectsFoods = require("../data/posts.js")
 
 // READ - (INDEX)
 function index(req, res) {
@@ -97,9 +97,12 @@ function modify(req, res) {
 
 // DELETE - (DESTROY)
 function destroy(req, res) {
+
     const id = parseInt(req.params.id)
-    const filtred = objectsFoods.findIndex(indice => indice.id === id);
-    console.log(filtred);
+    console.log(id)
+    console.log(objectsFoods);
+    const filtred = objectsFoods.findIndex(post => post.id === id);
+    console.log(filtred)
 
     if (filtred !== -1) {
         objectsFoods.splice(filtred, 1)

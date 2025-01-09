@@ -1,5 +1,5 @@
 
-export const posts = [
+const posts = [
     {
         id: 1,
         title: "Introduction to HTML Basics",
@@ -83,3 +83,5 @@ export const posts = [
     },
 
 ];
+
+module.exports = posts
