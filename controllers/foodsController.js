@@ -52,10 +52,11 @@ function store(req, res) {
     // Creiamo un nuovo elemento da inserire nell'array del db.js
     const newAliment = {
         id: ++flagID,
-        titolo: req.body.titolo,
-        contenuto: req.body.contenuto,
-        immagine: req.body.immagine,
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
         tags: req.body.tags,
+        available: req.body.available,
     }
     objectsFoods.push(newAliment)
     res.status(201).json(newAliment);
@@ -74,8 +75,8 @@ function update(req, res) {
     const id = parseInt(req.params.id)
 
     if (filtredArray) {
-        const { titolo, contenuto, immagine, tags } = req.body
-        const modifiedObject = { id, titolo, contenuto, immagine, tags }
+        const { title, content, image, tags } = req.body
+        const modifiedObject = { id, title, content, image, tags }
         for (const key in filtredArray) {
             filtredArray[key] = modifiedObject[key];
         }
